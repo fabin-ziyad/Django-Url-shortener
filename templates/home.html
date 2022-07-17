@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!--=====================================
+       devopled by fabin ziyad
+       github: https://github.com/fabin-ziyad
+    ==========================================-->
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+    <title>url shortner</title>
+<style>
+    ::-webkit-scrollbar {
+    display: none;
+    }
+    body{
+        /* background: linear-gradient(orangered,white); */
+        background-image: url('/static/images/background-ga0cbba8b1_1280.png');
+        background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+        margin: 0px;
+        padding: 0px;
+        overflow:auto;
+       
+    }
+.container{
+    width: 60%;
+    height: 250px;
+    margin: auto;
+    padding: 10px;
+    margin-top: 10%;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid red;
+    box-shadow: 0px 0px 2px 2px grey;
+}
+.container input{
+    margin: auto;
+    width: 70%;
+    height: 30px;
+    border-radius: 5px;
+    border: 0px;
+    margin-top: 50px;
+    text-align: center;
+    box-shadow: 0px 0px  1px 1px grey;
+
+}
+.container button{
+    margin-top: 60px;
+    background-color: rgb(16, 231, 159);
+    color: white;
+    width: 90px;
+    height: 26px;
+    border-radius: 6px;
+    border: 0px;
+    font-family: cursive;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0px 0px  0px 1px grey;
+
+}
+.container button:hover{
+   background-color: white;
+   color: black;
+   transition-duration:4s ;
+}
+
+.shortlink{
+    text-align: center;
+    backdrop-filter: blur(10px);
+    width: 60%;
+    height: 50px;
+    margin: auto;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10%;
+    border: 1px solid red;
+    box-shadow: 0px 0px  0px 2px grey;
+
+}
+h2{
+    text-align: center;
+    color: white;
+}
+h4{
+    text-align: center;
+    color: rgb(0, 0, 0);
+    
+}
+p{
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+nav{
+ width: 100%;
+ background-color: black;
+ margin: 0px;
+ margin-top: -30px;
+ padding: 0px;
+ height: 72px;
+ color: white;
+ text-align: center;
+}
+h3{
+    margin-top: 30px;
+    padding-top: 30px;
+}
+footer div{
+    width: 100%;
+ background-color: black;
+ margin: 0px;
+ margin-top: -30px;
+ padding: 0px;
+ height: 72px;
+ color: white;
+ bottom: -20px;
+ text-align: center;
+}
+</style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div><h3>URL SHORTENER</h3></div>
+            
+        </nav>
+    </header>
+    <section>
+        <div class="container">
+            <h2>URL SHORTENER</h2>
+            <form id="post-form">
+                {% csrf_token %}
+        <input type="text" name="link" id="link" placeholder="Enter your url" required><br>
+        <button type="submit" id="shorten">Shorten</button>
+    </form>
+        </div>
+        <h4>Shortened url</h4>
+        <div class="shortlink">
+            <p id="final-link"></p>
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            
+            <h3><a href="https://github.com/fabin-ziyad">MADE BY FABIN ZIYAD </a></h3>
+            
+        </div>
+    </footer>
+    <script type="text/javascript">
+        $(document).on('submit','#post-form',function(e){
+          e.preventDefault();
+      
+          $.ajax({
+            type:'POST',
+            url:'/create',
+            data:{
+              link:$('#link').val(),
+              csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success: function(data){
+        $('p').html("http://127.0.0.1:8000/"+data)
+      }
+    });
+   });
+   </script> 
+</body>
+</html>
+    <!--=====================================
+       devopled by fabin ziyad
+       github: https://github.com/fabin-ziyad
+    ==========================================-->
